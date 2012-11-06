@@ -19,13 +19,11 @@ Address.class_eval do
     "#{firstname} #{lastname}: #{zipcode}, #{country}, #{state || state_name}, #{city}, #{address1} #{address2}"
   end
   
-  def destroy_with_saving_used
+  def destroy
     if can_be_deleted?
-      destroy_without_saving_used
+      super
     else
       update_attribute(:deleted_at, Time.now)
     end
   end
-  alias_method_chain :destroy, :saving_used
-
 end
